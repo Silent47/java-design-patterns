@@ -5,9 +5,7 @@ folder: flyweight
 permalink: /patterns/flyweight/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Intermediate
  - Performance
 ---
 
@@ -32,7 +30,7 @@ Wikipedia says
 
 Translating our alchemist shop example from above. First of all we have different potion types
 
-```
+```java
 public interface Potion {
   void drink();
 }
@@ -64,7 +62,7 @@ public class InvisibilityPotion implements Potion {
 
 Then the actual Flyweight object which is the factory for creating potions
 
-```
+```java
 public class PotionFactory {
 
   private final Map<PotionType, Potion> potions;
@@ -74,7 +72,7 @@ public class PotionFactory {
   }
 
   Potion createPotion(PotionType type) {
-    Potion potion = potions.get(type);
+    var potion = potions.get(type);
     if (potion == null) {
       switch (type) {
         case HEALING:
@@ -100,8 +98,8 @@ public class PotionFactory {
 
 And it can be used as below
 
-```
-PotionFactory factory = new PotionFactory();
+```java
+var factory = new PotionFactory();
 factory.createPotion(PotionType.INVISIBILITY).drink(); // You become invisible. (Potion=6566818)
 factory.createPotion(PotionType.HEALING).drink(); // You feel healed. (Potion=648129364)
 factory.createPotion(PotionType.INVISIBILITY).drink(); // You become invisible. (Potion=6566818)
@@ -109,6 +107,9 @@ factory.createPotion(PotionType.HOLY_WATER).drink(); // You feel blessed. (Potio
 factory.createPotion(PotionType.HOLY_WATER).drink(); // You feel blessed. (Potion=1104106489)
 factory.createPotion(PotionType.HEALING).drink(); // You feel healed. (Potion=648129364)
 ```
+
+## Class diagram
+![alt text](./etc/flyweight.urm.png "Flyweight pattern class diagram")
 
 ## Applicability
 The Flyweight pattern's effectiveness depends heavily on how

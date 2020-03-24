@@ -5,8 +5,7 @@ folder: factory-method
 permalink: /patterns/factory-method/
 categories: Creational
 tags:
- - Java
- - Difficulty-Beginner
+ - Extensibility
  - Gang Of Four
 ---
 
@@ -35,32 +34,35 @@ Wikipedia says
 
 Taking our blacksmith example above. First of all we have a blacksmith interface and some implementations for it
 
-```
+```java
 public interface Blacksmith {
   Weapon manufactureWeapon(WeaponType weaponType);
 }
 
 public class ElfBlacksmith implements Blacksmith {
   public Weapon manufactureWeapon(WeaponType weaponType) {
-    return new ElfWeapon(weaponType);
+    return ELFARSENAL.get(weaponType);
   }
 }
 
 public class OrcBlacksmith implements Blacksmith {
   public Weapon manufactureWeapon(WeaponType weaponType) {
-    return new OrcWeapon(weaponType);
+    return ORCARSENAL.get(weaponType);
   }
 }
 ```
 
 Now as the customers come the correct type of blacksmith is summoned and requested weapons are manufactured
 
-```
-Blacksmith blacksmith = new ElfBlacksmith();
+```java
+var blacksmith = new ElfBlacksmith();
 blacksmith.manufactureWeapon(WeaponType.SPEAR);
 blacksmith.manufactureWeapon(WeaponType.AXE);
 // Elvish weapons are created
 ```
+
+## Class diagram
+![alt text](./etc/factory-method.urm.png "Factory Method pattern class diagram")
 
 ## Applicability
 Use the Factory Method pattern when
@@ -69,7 +71,7 @@ Use the Factory Method pattern when
 * a class wants its subclasses to specify the objects it creates
 * classes delegate responsibility to one of several helper subclasses, and you want to localize the knowledge of which helper subclass is the delegate
 
-## Known uses
+## Real world examples
 
 * [java.util.Calendar](http://docs.oracle.com/javase/8/docs/api/java/util/Calendar.html#getInstance--)
 * [java.util.ResourceBundle](http://docs.oracle.com/javase/8/docs/api/java/util/ResourceBundle.html#getBundle-java.lang.String-)

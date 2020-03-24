@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014-2016 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,7 +23,7 @@
 
 package com.iluwatar.mute;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Tests that Mute idiom example runs without errors.

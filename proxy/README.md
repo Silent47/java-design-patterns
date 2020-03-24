@@ -5,9 +5,8 @@ folder: proxy
 permalink: /patterns/proxy/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Beginner
+ - Decoupling
 ---
 
 ## Also known as
@@ -34,7 +33,7 @@ Wikipedia says
 
 Taking our wizard tower example from above. Firstly we have the wizard tower interface and the ivory tower class
 
-```
+```java
 public interface WizardTower {
 
   void enter(Wizard wizard);
@@ -53,7 +52,7 @@ public class IvoryTower implements WizardTower {
 
 Then a simple wizard class
 
-```
+```java
 public class Wizard {
 
   private final String name;
@@ -71,7 +70,7 @@ public class Wizard {
 
 Then we have the proxy to add access control to wizard tower
 
-```
+```java
 public class WizardTowerProxy implements WizardTower {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(WizardTowerProxy.class);
@@ -100,14 +99,17 @@ public class WizardTowerProxy implements WizardTower {
 
 And here is tower entering scenario
 
-```
-WizardTowerProxy proxy = new WizardTowerProxy(new IvoryTower());
+```java
+var proxy = new WizardTowerProxy(new IvoryTower());
 proxy.enter(new Wizard("Red wizard")); // Red wizard enters the tower.
 proxy.enter(new Wizard("White wizard")); // White wizard enters the tower.
 proxy.enter(new Wizard("Black wizard")); // Black wizard enters the tower.
 proxy.enter(new Wizard("Green wizard")); // Green wizard is not allowed to enter!
 proxy.enter(new Wizard("Brown wizard")); // Brown wizard is not allowed to enter!
 ```
+
+## Class diagram
+![alt text](./etc/proxy.urm.png "Proxy pattern class diagram")
 
 ## Applicability
 Proxy is applicable whenever there is a need for a more
@@ -127,10 +129,8 @@ are several common situations in which the Proxy pattern is applicable
 * Count references to an object
 
 ## Tutorials
-* [Controlling Access With Proxy Pattern](http://java-design-patterns.com/blog/controlling-access-with-proxy-pattern/)
 
-## Presentations
-* [Proxy](https://github.com/iluwatar/java-design-patterns/tree/master/proxy/etc/presentation.html)
+* [Controlling Access With Proxy Pattern](http://java-design-patterns.com/blog/controlling-access-with-proxy-pattern/)
 
 ## Real world examples
 

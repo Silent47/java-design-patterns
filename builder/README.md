@@ -5,9 +5,7 @@ folder: builder
 permalink: /patterns/builder/
 categories: Creational
 tags:
- - Java
- - Gang Of Four
- - Difficulty-Intermediate
+ - Gang of Four
 ---
 
 ## Intent
@@ -31,7 +29,7 @@ Wikipedia says
 
 Having said that let me add a bit about what telescoping constructor anti-pattern is. At one point or the other we have all seen a constructor like below:
 
-```
+```java
 public Hero(Profession profession, String name, HairType hairType, HairColor hairColor, Armor armor, Weapon weapon) {
 }
 ```
@@ -42,7 +40,7 @@ As you can see the number of constructor parameters can quickly get out of hand 
 
 The sane alternative is to use the Builder pattern. First of all we have our hero that we want to create
 
-```
+```java
 public final class Hero {
   private final Profession profession;
   private final String name;
@@ -64,7 +62,7 @@ public final class Hero {
 
 And then we have the builder
 
-```
+```java
   public static class Builder {
     private final Profession profession;
     private final String name;
@@ -109,9 +107,12 @@ And then we have the builder
 
 And then it can be used as:
 
+```java
+var mage = new Hero.Builder(Profession.MAGE, "Riobard").withHairColor(HairColor.BLACK).withWeapon(Weapon.DAGGER).build();
 ```
-Hero mage = new Hero.Builder(Profession.MAGE, "Riobard").withHairColor(HairColor.BLACK).withWeapon(Weapon.DAGGER).build();
-```
+
+## Class diagram
+![alt text](./etc/builder.urm.png "Builder class diagram")
 
 ## Applicability
 Use the Builder pattern when
@@ -126,6 +127,7 @@ Use the Builder pattern when
 * [java.lang.StringBuffer](http://docs.oracle.com/javase/8/docs/api/java/lang/StringBuffer.html#append-boolean-)
 * All implementations of [java.lang.Appendable](http://docs.oracle.com/javase/8/docs/api/java/lang/Appendable.html)
 * [Apache Camel builders](https://github.com/apache/camel/tree/0e195428ee04531be27a0b659005e3aa8d159d23/camel-core/src/main/java/org/apache/camel/builder)
+* [Apache Commons Option.Builder](https://commons.apache.org/proper/commons-cli/apidocs/org/apache/commons/cli/Option.Builder.html)
 
 ## Credits
 

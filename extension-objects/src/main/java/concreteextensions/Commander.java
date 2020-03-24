@@ -1,6 +1,6 @@
-/**
+/*
  * The MIT License
- * Copyright (c) 2014 Ilkka Seppälä
+ * Copyright © 2014-2019 Ilkka Seppälä
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -20,6 +20,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
+
 package concreteextensions;
 
 import abstractextensions.CommanderExtension;
@@ -28,9 +29,11 @@ import org.slf4j.LoggerFactory;
 import units.CommanderUnit;
 
 /**
- * Class defining Commander
+ * Class defining Commander.
  */
 public class Commander implements CommanderExtension {
+
+  private static final Logger LOGGER = LoggerFactory.getLogger(Commander.class);
 
   private CommanderUnit unit;
 
@@ -38,10 +41,8 @@ public class Commander implements CommanderExtension {
     this.unit = commanderUnit;
   }
 
-  final Logger logger = LoggerFactory.getLogger(Commander.class);
-
   @Override
   public void commanderReady() {
-    logger.info("[Commander] " + unit.getName() + " is ready!");
+    LOGGER.info("[Commander] " + unit.getName() + " is ready!");
   }
 }

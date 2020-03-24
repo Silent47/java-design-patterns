@@ -3,11 +3,9 @@ layout: pattern
 title: EIP Wire Tap
 folder: eip-wire-tap
 permalink: /patterns/eip-wire-tap/
-categories: Enterprise integration
+categories: Integration
 tags:
- - Java
- - Difficulty-Intermittent
- - Enterprise integration
+ - Enterprise Integration Pattern
 ---
 
 ## Intent
@@ -15,6 +13,7 @@ In most integration cases there is a need to monitor the messages flowing throug
 by intercepting the message and redirecting it to a different location like console, filesystem or the database.
 It is important that such functionality should not modify the original message and influence the processing path.
 
+## Diagram
 ![alt text](./etc/wiretap.gif "Wire Tap")
 
 ## Applicability

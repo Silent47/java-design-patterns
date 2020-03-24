@@ -5,9 +5,8 @@ folder: facade
 permalink: /patterns/facade/
 categories: Structural
 tags:
- - Java
  - Gang Of Four
- - Difficulty-Beginner
+ - Decoupling
 ---
 
 ## Intent
@@ -32,7 +31,7 @@ Wikipedia says
 
 Taking our goldmine example from above. Here we have the dwarven mine worker hierarchy
 
-```
+```java
 public abstract class DwarvenMineWorker {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(DwarvenMineWorker.class);
@@ -77,9 +76,7 @@ public abstract class DwarvenMineWorker {
   }
 
   public void action(Action... actions) {
-    for (Action action : actions) {
-      action(action);
-    }
+    Arrays.stream(actions).forEach(this::action);
   }
 
   public abstract void work();
@@ -140,16 +137,16 @@ public class DwarvenCartOperator extends DwarvenMineWorker {
 
 To operate all these goldmine workers we have the facade
 
-```
+```java
 public class DwarvenGoldmineFacade {
 
   private final List<DwarvenMineWorker> workers;
 
   public DwarvenGoldmineFacade() {
-    workers = new ArrayList<>();
-    workers.add(new DwarvenGoldDigger());
-    workers.add(new DwarvenCartOperator());
-    workers.add(new DwarvenTunnelDigger());
+      workers = List.of(
+            new DwarvenGoldDigger(),
+            new DwarvenCartOperator(),
+            new DwarvenTunnelDigger());
   }
 
   public void startNewDay() {
@@ -166,16 +163,14 @@ public class DwarvenGoldmineFacade {
 
   private static void makeActions(Collection<DwarvenMineWorker> workers,
       DwarvenMineWorker.Action... actions) {
-    for (DwarvenMineWorker worker : workers) {
-      worker.action(actions);
-    }
+    workers.forEach(worker -> worker.action(actions));
   }
 }
 ```
 
 Now to use the facade
 
-```
+```java
 DwarvenGoldmineFacade facade = new DwarvenGoldmineFacade();
 facade.startNewDay();
 // Dwarf gold digger wakes up.
@@ -196,6 +191,9 @@ facade.endDay();
 // Dwarven tunnel digger goes home.
 // Dwarven tunnel digger goes to sleep.
 ```
+
+## Class diagram
+![alt text](./etc/facade.urm.png "Facade pattern class diagram")
 
 ## Applicability
 Use the Facade pattern when

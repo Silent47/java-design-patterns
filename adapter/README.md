@@ -5,9 +5,7 @@ folder: adapter
 permalink: /patterns/adapter/
 categories: Structural
 tags:
- - Java
- - Gang Of Four
- - Difficulty-Beginner
+ - Gang of Four
 ---
 
 ## Also known as
@@ -40,7 +38,7 @@ Consider a captain that can only use rowing boats and cannot sail at all.
 
 First we have interfaces `RowingBoat` and `FishingBoat`
 
-```
+```java
 public interface RowingBoat {
   void row();
 }
@@ -55,16 +53,15 @@ public class FishingBoat {
 
 And captain expects an implementation of `RowingBoat` interface to be able to move
 
-```
-public class Captain implements RowingBoat {
+```java
+public class Captain {
 
   private RowingBoat rowingBoat;
-
+  // default constructor and setter for rowingBoat
   public Captain(RowingBoat rowingBoat) {
     this.rowingBoat = rowingBoat;
   }
 
-  @Override
   public void row() {
     rowingBoat.row();
   }
@@ -73,7 +70,7 @@ public class Captain implements RowingBoat {
 
 Now let's say the pirates are coming and our captain needs to escape but there is only fishing boat available. We need to create an adapter that allows the captain to operate the fishing boat with his rowing boat skills.
 
-```
+```java
 public class FishingBoatAdapter implements RowingBoat {
 
   private static final Logger LOGGER = LoggerFactory.getLogger(FishingBoatAdapter.class);
@@ -93,10 +90,13 @@ public class FishingBoatAdapter implements RowingBoat {
 
 And now the `Captain` can use the `FishingBoat` to escape the pirates.
 
-```
-Captain captain = new Captain(new FishingBoatAdapter());
+```java
+var captain = new Captain(new FishingBoatAdapter());
 captain.row();
 ```
+
+## Class diagram
+![alt text](./etc/adapter.urm.png "Adapter class diagram")
 
 ## Applicability
 Use the Adapter pattern when
